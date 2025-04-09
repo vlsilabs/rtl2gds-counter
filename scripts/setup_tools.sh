@@ -8,7 +8,7 @@ sudo apt update
 sudo apt install -y iverilog gtkwave make git curl build-essential
 
 # 🧰 Development dependencies for Yosys
-sudo apt install -y pkg-config libreadline-dev libffi-dev tcl-dev libboost-system-dev libboost-filesystem-dev
+sudo apt install -y pkg-config libreadline-dev libffi-dev tcl-dev libboost-system-dev libboost-filesystem-dev bison flex
 
 # 🐳 Install Docker (for OpenLane)
 if ! command -v docker &> /dev/null; then

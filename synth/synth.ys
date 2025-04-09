@@ -1,0 +1,7 @@
+read_verilog verilog/src/counter.v
+synth -top counter
+dfflibmap -liberty ./OpenLane/pdks/sky130A/libs.tech/liberty/sky130_fd_sc_hd__typ.lib
+abc -liberty ./OpenLane/pdks/sky130A/libs.tech/liberty/sky130_fd_sc_hd__typ.lib
+clean
+write_verilog counter_synth.v
+write_json counter.json

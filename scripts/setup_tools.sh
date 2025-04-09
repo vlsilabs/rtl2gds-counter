@@ -3,13 +3,14 @@ set -e
 
 echo "🔧 Installing required tools..."
 
-# Update and install basic tools
+# Update and install base tools
 sudo apt update
 sudo apt install -y iverilog gtkwave make git curl build-essential
 
-# ---------------------------
-# Install Docker (for OpenLane)
-# ---------------------------
+# 🧰 Development dependencies for Yosys
+sudo apt install -y pkg-config libreadline-dev libffi-dev tcl-dev libboost-system-dev libboost-filesystem-dev
+
+# 🐳 Install Docker (for OpenLane)
 if ! command -v docker &> /dev/null; then
     echo "🐳 Docker not found. Installing Docker..."
     sudo apt install -y docker.io
@@ -21,9 +22,7 @@ else
     echo "✅ Docker is already installed."
 fi
 
-# ---------------------------
-# Clone and build Yosys
-# ---------------------------
+# 🔨 Clone and build Yosys
 if [ ! -d "yosys" ]; then
     git clone https://github.com/YosysHQ/yosys.git
 fi
@@ -34,9 +33,7 @@ make -j$(nproc)
 sudo make install
 cd ..
 
-# ---------------------------
-# Clone and setup OpenLane
-# ---------------------------
+# 🚀 Clone and setup OpenLane
 if [ ! -d "OpenLane" ]; then
     git clone https://github.com/The-OpenROAD-Project/OpenLane.git
 fi
@@ -45,9 +42,7 @@ cd OpenLane
 make pull-openlane TAG=2023.10.23 || echo "⚠️ Docker setup required. Run 'docker run hello-world' to verify."
 cd ..
 
-# ---------------------------
-# Install KLayout
-# ---------------------------
+# 🖼️ Install KLayout
 sudo apt install -y klayout
 
 echo "✅ All tools installed!"
